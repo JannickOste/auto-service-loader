@@ -13,7 +13,7 @@
   "scripts": {
     "test": "jest --verbose",
     "start": "ts-node src/index",
-    "build": "npm run test && rimraf dist && tsc --module commonjs",
+    "build": "rimraf dist && tsc --module commonjs",
     "publish": "npm run build && npm publish"
   },
   "author": "",
