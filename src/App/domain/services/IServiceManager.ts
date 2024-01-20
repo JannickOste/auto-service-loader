@@ -1,5 +1,5 @@
 import { ServiceContainer } from "./ServiceContainer";
-import AService from "../entities/AService";
+import ServiceInterface from "../entities/ServiceInterface";
 
 export default interface IServiceManager 
 {

@@ -9,13 +9,13 @@ describe('Testing ServiceManager', () => {
 
     test("fetchServiceContainer returns correct type.", async() => 
     {
-        expect(await getManager().fetchServiceContainer())
+        expect(await getManager().fetchServiceContainer("./src/test/**/*.{ts,js}"))
             .toEqual(expect.any(ServiceContainer));
     });
     
     test("fetchServiceContainer loads services into container", async() => 
     {
-        expect((await getManager().fetchServiceContainer()).get(InjectedDummyService))
+        expect((await getManager().fetchServiceContainer("./src/test/**/*.{ts,js}")).get(InjectedDummyService))
             .toEqual(expect.any(InjectedDummyService));
     });
 
@@ -28,7 +28,7 @@ describe('Testing ServiceManager', () => {
     test("fetchServiceContainer loads services into container", async() => 
     {
         const manager  = getManager();
-        const container = await manager.fetchServiceContainer();
+        const container = await manager.fetchServiceContainer("./src/test/**/*.{ts,js}");
 
         await manager.startAllServices(container)
     });

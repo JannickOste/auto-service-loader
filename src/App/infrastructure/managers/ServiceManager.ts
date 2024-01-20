@@ -4,7 +4,6 @@ import DependencyLocator from "../services/DependencyLocator";
 import { ServiceContainer } from "../../domain/services/ServiceContainer";
 import { DependencyDecoratorKey } from "../../domain/decorators/DependencyDecorator/DependencyDecoratorKey";
 import { DependencyDecoratorMetadata } from "../../domain/decorators/DependencyDecorator/DependencyDecoratorMetadata";
-import path from "path";
 
 //!TODO: Move to domain
 export type ServiceManagerProps = {
@@ -13,11 +12,10 @@ export type ServiceManagerProps = {
 
 export default class ServiceManager implements IServiceManager
 {
-    async fetchServiceContainer(globPattern?: string): Promise<ServiceContainer> 
+    async fetchServiceContainer(globPattern: string): Promise<ServiceContainer> 
     {
         const container: ServiceContainer =  new ServiceContainer();
-        console.dir()
-        for(let service of await new DependencyLocator().findAll(globPattern ?? path.join(path.dirname(require.main?.filename ?? ""), `**/*.service.{ts,js}`)))
+        for(let service of await new DependencyLocator().findAll(globPattern))
         {   
             if(!container.registeredServices.includes(service))
             {
