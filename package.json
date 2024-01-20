@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@types/node": "^20.11.5",
     "inversify": "^6.0.2",
     "reflect-metadata": "^0.2.1"
   },
