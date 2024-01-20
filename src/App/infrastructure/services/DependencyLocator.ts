@@ -14,9 +14,11 @@ export default class DependencyLocator implements IDependencyLocator {
                 const module = await import(path);
                 
                 //!TODO add support for non default members. 
-                const current = module.default; 
-                if (current && typeof current === "function" && Reflect.getMetadata(DependencyDecoratorKey, current)) {
-                    services.push(current);
+                for(let current of Object.values(module))
+                {
+                    if (current && typeof current === "function" && Reflect.getMetadata(DependencyDecoratorKey, current)) {
+                        services.push(current as any);
+                    }
                 }
             } catch (error) {
                 console.error(`Error loading module from ${path}: ${(error as Error).message}`);
