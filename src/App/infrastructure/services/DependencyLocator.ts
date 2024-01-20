@@ -6,7 +6,7 @@ export default class DependencyLocator implements IDependencyLocator {
     async findAll(globPattern: string): Promise<Array<new (...args: any) => any>> {
         const services: Array<new (...args: any) => any> = [];
 
-        const files = globSync(globPattern, { absolute: true });
+        const files = globSync(globPattern, { absolute: true, ignore: 'node_modules/**' });
 
         // !TODO: Better error handling
         for (const path of files) {
