@@ -4,7 +4,7 @@ import { DependencyDecoratorProps } from "./DependencyDecoratorProps";
 import { DependencyDecoratorMetadata } from "./DependencyDecoratorMetadata";
 import { DependencyDecoratorKey } from "./DependencyDecoratorKey";
 
-export default function DependencyDecorator<T extends abstract new (...args: any) => unknown>(props?: DependencyDecoratorProps): (target: T) => T {
+export default function Dependency<T extends abstract new (...args: any) => unknown>(props?: DependencyDecoratorProps): (target: T) => T {
     return function (target: T): T {
         target = injectable()(target);
         const defaultParsers: { [key in keyof DependencyDecoratorMetadata]: () => any } = {

@@ -1,6 +1,6 @@
-import DependencyDecorator from "../../App/domain/decorators/DependencyDecorator/DependencyDecorator";
+import Dependency from "../../App/domain/decorators/DependencyDecorator/Dependency";
 
-@DependencyDecorator()
+@Dependency()
 export default class InjectedDummyService  {  
     
 }

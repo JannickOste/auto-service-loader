@@ -5,11 +5,6 @@ import { ServiceContainer } from "../../domain/services/ServiceContainer";
 import { DependencyDecoratorKey } from "../../domain/decorators/DependencyDecorator/DependencyDecoratorKey";
 import { DependencyDecoratorMetadata } from "../../domain/decorators/DependencyDecorator/DependencyDecoratorMetadata";
 
-//!TODO: Move to domain
-export type ServiceManagerProps = {
-    globPattern: string;
-}
-
 export default class ServiceManager implements IServiceManager
 {
     async fetchServiceContainer(globPattern: string): Promise<ServiceContainer> 
@@ -17,9 +12,9 @@ export default class ServiceManager implements IServiceManager
         const container: ServiceContainer =  new ServiceContainer();
         for(let service of await new DependencyLocator().findAll(globPattern))
         {   
-            if(!container.registeredServices.includes(service))
+            if(!container.includes(service))
             {
-                container.registerService(service).to(service);
+                container.bind(service).to(service);
             }
         }   
         

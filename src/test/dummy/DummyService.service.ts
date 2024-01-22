@@ -1,8 +1,8 @@
 import { inject } from "inversify";
-import DependencyDecorator from "../../App/domain/decorators/DependencyDecorator/DependencyDecorator";
+import Dependency from "../../App/domain/decorators/DependencyDecorator/Dependency";
 import ServiceInterface from "../../App/domain/entities/ServiceInterface";
 
-@DependencyDecorator()
+@Dependency()
 export default class InjectedDummyService  {  
 
 
@@ -16,7 +16,7 @@ export default class InjectedDummyService  {
     
 }
 
-@DependencyDecorator()
+@Dependency()
 export class DummyService implements ServiceInterface
 {
     constructor(

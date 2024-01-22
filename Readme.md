@@ -1,6 +1,10 @@
 # auto-service-loader
 
-`auto-service-loader` is a TypeScript package designed to simplify service and dependency management in your application. It leverages decorators, dependency injection, and reflection to make it easier to organize and initialize services and dependencies.
+Warning!: The service start/stop functions have not been properly implemented yet, only automated loading for dependencies works at the moment. (you can manualy start services using container->get(ClassType) will be replaced with optional bindTo in decorator to allow for symbols, generic interfaces, etc...)
+
+`auto-service-loader` is a TypeScript package designed to simplify service and dependency management in your application. It leverages decorators, dependency injection, and reflection to make it easier to organize and initialize services and dependencies using inversify.
+
+
 
 ## Installation
 
