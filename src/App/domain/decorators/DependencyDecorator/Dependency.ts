@@ -15,7 +15,7 @@ export default function Dependency<T extends abstract new (...args: any) => unkn
             isService: () => false
         };
 
-        const metadata: any = (props ?? {}); // Ignore missing key using cast. . 
+        const metadata: any = (props ?? {});
         const existingKeys = Object.keys(metadata);
         for (const [key, callback] of Object.entries(defaultParsers)) {
             if (!existingKeys.includes(key)) {

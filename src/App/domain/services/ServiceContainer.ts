@@ -1,4 +1,6 @@
 import { Container, interfaces } from "inversify";
+import { DependencyDecoratorKey } from "../decorators/DependencyDecorator/DependencyDecoratorKey";
+import { DependencyDecoratorMetadata } from "../decorators/DependencyDecorator/DependencyDecoratorMetadata";
 
 
 export class ServiceContainer extends Container {
@@ -20,13 +22,34 @@ export class ServiceContainer extends Container {
      * @returns 
      */
     public bind<T>(identifier: interfaces.ServiceIdentifier<T>): interfaces.BindingToSyntax<T> {
-        if (!this._registeredServices.includes(identifier)) {
-            this._registeredServices.push(identifier);
+        if (!this.includes(identifier)) {
+            const metadata: DependencyDecoratorMetadata | undefined = Reflect.getMetadata(DependencyDecoratorKey, identifier);
 
+            if(this.isService(identifier))
+            {
+                this._registeredServices.push(identifier);
+            } else if(this.isDependency(identifier))
+            {
+                this._registeredDependencies.push(identifier)
+            }
+            
             return super.bind(identifier)
         }
 
         throw new Error("Service definition already defined");
+    }
+
+    private isService(value: unknown): boolean
+    {
+        return this.isDependency(value)
+                && false; //!TODO: Implement logic for start / stop check. 
+    }
+
+    private isDependency(value: unknown): boolean 
+    {
+        return value 
+            && typeof value === "function"
+            && Reflect.getMetadata(DependencyDecoratorKey, value);
     }
 
     /**
